@@ -1,0 +1,117 @@
+### ============================================================
+### NOVABANK GATEWAY - HTTP TEST COLLECTION
+### ============================================================
+
+@baseUrl = http://localhost:8080
+
+
+### ============================================================
+### CUSTOMER SERVICE
+### ============================================================
+
+### Customer Service - Health
+GET {{baseUrl}}/api/customers/health
+
+
+### Get Customer 123
+GET {{baseUrl}}/api/customers/123
+
+
+### Get Customer 456
+GET {{baseUrl}}/api/customers/456
+
+
+### Get Non-existent Customer
+GET {{baseUrl}}/api/customers/999
+
+
+### ============================================================
+### ACCOUNT SERVICE
+### ============================================================
+
+### Account Service - Health
+GET {{baseUrl}}/api/accounts/health
+
+
+### Get Account 456
+GET {{baseUrl}}/api/accounts/456
+
+
+### Get Another Account
+GET {{baseUrl}}/api/accounts/789
+
+
+### ============================================================
+### PAYMENT SERVICE
+### ============================================================
+
+### Payment Service - Health
+GET {{baseUrl}}/api/payments/health
+
+
+### Create Payment
+POST {{baseUrl}}/api/payments
+Content-Type: application/json
+
+{
+  "fromAccount": "A100",
+  "toAccount": "A200",
+  "amount": 100
+}
+
+
+### Create Larger Payment
+POST {{baseUrl}}/api/payments
+Content-Type: application/json
+
+{
+  "fromAccount": "A100",
+  "toAccount": "A300",
+  "amount": 1500
+}
+
+
+### Get Payment
+GET {{baseUrl}}/api/payments/12345
+
+
+### ============================================================
+### NEGATIVE / ROUTING TESTS
+### ============================================================
+
+### Unknown Gateway Route
+GET {{baseUrl}}/api/unknown
+
+
+### Unknown Customer Route
+GET {{baseUrl}}/api/customers/
+
+
+### Unknown Account Route
+GET {{baseUrl}}/api/accounts/
+
+
+### Unknown Payment Route
+GET {{baseUrl}}/api/payments/
+
+
+### Wrong HTTP Method - Customer
+POST {{baseUrl}}/api/customers/123
+Content-Type: application/json
+
+{
+  "name": "Test"
+}
+
+
+### Wrong HTTP Method - Account
+POST {{baseUrl}}/api/accounts/456
+Content-Type: application/json
+
+{
+  "currency": "USD"
+}
+
+
+### Wrong HTTP Method - Payment
+GET {{baseUrl}}/api/payments/
