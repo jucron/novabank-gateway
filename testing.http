@@ -4,14 +4,33 @@
 
 @baseUrl = http://localhost:8080
 
+### ============================================================
+### GATEWAY HEALTH
+### ============================================================
+
+### Gateway Health
+GET {{baseUrl}}/api/health
+
+
+### ============================================================
+### AUTH SERVICE
+### ============================================================
+
+### Generate development JWT
+POST {{baseUrl}}/api/auth/token
+
+### Validate JWT
+@authToken = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ1c2VyLTEyMyIsInJvbGUiOiJjdXN0b21lciIsImlhdCI6MTc4Njk3ODg2NywiZXhwIjoxNzg2OTgyNDY3fQ.02LEEQQKAWdyQda7EXfOYkA4EZqRSPl4NRI5vKCbi5g
+POST {{baseUrl}}/api/auth/validate
+Authorization: Bearer {{authToken}}
+
+### Validate malformed Authorization header
+POST {{baseUrl}}/api/auth/validate
+Authorization: Bad token
 
 ### ============================================================
 ### CUSTOMER SERVICE
 ### ============================================================
-
-### Customer Service - Health
-GET {{baseUrl}}/api/customers/health
-
 
 ### Get Customer 123
 GET {{baseUrl}}/api/customers/123
@@ -29,10 +48,6 @@ GET {{baseUrl}}/api/customers/999
 ### ACCOUNT SERVICE
 ### ============================================================
 
-### Account Service - Health
-GET {{baseUrl}}/api/accounts/health
-
-
 ### Get Account 456
 GET {{baseUrl}}/api/accounts/456
 
@@ -44,10 +59,6 @@ GET {{baseUrl}}/api/accounts/789
 ### ============================================================
 ### PAYMENT SERVICE
 ### ============================================================
-
-### Payment Service - Health
-GET {{baseUrl}}/api/payments/health
-
 
 ### Create Payment
 POST {{baseUrl}}/api/payments
@@ -84,15 +95,15 @@ GET {{baseUrl}}/api/unknown
 
 
 ### Unknown Customer Route
-GET {{baseUrl}}/api/customers/
+GET {{baseUrl}}/api/customers
 
 
 ### Unknown Account Route
-GET {{baseUrl}}/api/accounts/
+GET {{baseUrl}}/api/accounts
 
 
 ### Unknown Payment Route
-GET {{baseUrl}}/api/payments/
+GET {{baseUrl}}/api/payments
 
 
 ### Wrong HTTP Method - Customer

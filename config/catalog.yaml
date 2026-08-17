@@ -1,0 +1,25 @@
+apis:
+  customers:
+    path: /customers
+    target: customer-service
+    isOpenPath: true
+
+  accounts:
+    path: /accounts
+    target: account-service
+    isOpenPath: true
+
+  payments:
+    path: /payments
+    target: payment-service
+    isOpenPath: true
+
+  auth:
+    path: /auth
+    target: auth-service
+    isOpenPath: true
+
+  gateway-health:
+    path: /health
+    target: gateway-health
+    isOpenPath: false

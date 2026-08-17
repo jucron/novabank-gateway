@@ -1,0 +1,15 @@
+targets:
+  customer-service:
+    url: http://customer-service:3001
+
+  account-service:
+    url: http://account-service:3002
+
+  payment-service:
+    url: http://payment-service:3003
+
+  auth-service:
+    url: http://auth-service:3004
+
+  gateway-health:
+    url: http://gateway-health:3005
