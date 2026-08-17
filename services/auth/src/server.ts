@@ -57,7 +57,7 @@ app.post("/auth/token", async () => {
     };
 });
 
-app.get("/verify", async (request, reply) => {
+app.get("/auth/verify", async (request, reply) => {
     const authorization = request.headers.authorization;
 
     if (!authorization) {

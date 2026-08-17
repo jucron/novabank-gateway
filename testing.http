@@ -11,7 +11,6 @@
 ### Gateway Health
 GET {{baseUrl}}/api/health
 
-
 ### ============================================================
 ### AUTH SERVICE
 ### ============================================================
@@ -20,7 +19,7 @@ GET {{baseUrl}}/api/health
 POST {{baseUrl}}/api/auth/token
 
 ### Validate JWT
-@authToken = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ1c2VyLTEyMyIsInJvbGUiOiJjdXN0b21lciIsImlhdCI6MTc4Njk3ODg2NywiZXhwIjoxNzg2OTgyNDY3fQ.02LEEQQKAWdyQda7EXfOYkA4EZqRSPl4NRI5vKCbi5g
+@authToken = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ1c2VyLTEyMyIsInJvbGUiOiJjdXN0b21lciIsImlhdCI6MTc4Njk4NDQ3MCwiZXhwIjoxNzg2OTg4MDcwfQ.Dp2PMu_6M3j16x-ALNN3HSjOkDOdV-GzfhU9vgO6cJk
 POST {{baseUrl}}/api/auth/validate
 Authorization: Bearer {{authToken}}
 
@@ -34,14 +33,17 @@ Authorization: Bad token
 
 ### Get Customer 123
 GET {{baseUrl}}/api/customers/123
+Authorization: Bearer {{authToken}}
 
 
 ### Get Customer 456
 GET {{baseUrl}}/api/customers/456
+Authorization: Bearer {{authToken}}
 
 
 ### Get Non-existent Customer
 GET {{baseUrl}}/api/customers/999
+Authorization: Bearer {{authToken}}
 
 
 ### ============================================================
@@ -50,10 +52,12 @@ GET {{baseUrl}}/api/customers/999
 
 ### Get Account 456
 GET {{baseUrl}}/api/accounts/456
+Authorization: Bearer {{authToken}}
 
 
 ### Get Another Account
 GET {{baseUrl}}/api/accounts/789
+Authorization: Bearer {{authToken}}
 
 
 ### ============================================================
@@ -63,6 +67,7 @@ GET {{baseUrl}}/api/accounts/789
 ### Create Payment
 POST {{baseUrl}}/api/payments
 Content-Type: application/json
+Authorization: Bearer {{authToken}}
 
 {
   "fromAccount": "A100",
@@ -74,6 +79,7 @@ Content-Type: application/json
 ### Create Larger Payment
 POST {{baseUrl}}/api/payments
 Content-Type: application/json
+Authorization: Bearer {{authToken}}
 
 {
   "fromAccount": "A100",
@@ -84,6 +90,7 @@ Content-Type: application/json
 
 ### Get Payment
 GET {{baseUrl}}/api/payments/12345
+Authorization: Bearer {{authToken}}
 
 
 ### ============================================================
@@ -96,19 +103,23 @@ GET {{baseUrl}}/api/unknown
 
 ### Unknown Customer Route
 GET {{baseUrl}}/api/customers
+Authorization: Bearer {{authToken}}
 
 
 ### Unknown Account Route
 GET {{baseUrl}}/api/accounts
+Authorization: Bearer {{authToken}}
 
 
 ### Unknown Payment Route
 GET {{baseUrl}}/api/payments
+Authorization: Bearer {{authToken}}
 
 
 ### Wrong HTTP Method - Customer
 POST {{baseUrl}}/api/customers/123
 Content-Type: application/json
+Authorization: Bearer {{authToken}}
 
 {
   "name": "Test"
@@ -118,6 +129,7 @@ Content-Type: application/json
 ### Wrong HTTP Method - Account
 POST {{baseUrl}}/api/accounts/456
 Content-Type: application/json
+Authorization: Bearer {{authToken}}
 
 {
   "currency": "USD"
@@ -125,4 +137,5 @@ Content-Type: application/json
 
 
 ### Wrong HTTP Method - Payment
-GET {{baseUrl}}/api/payments/
+GET {{baseUrl}}/api/payments
+Authorization: Bearer {{authToken}}

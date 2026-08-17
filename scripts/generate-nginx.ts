@@ -9,6 +9,7 @@ type CatalogApi = {
     path: string;
     target: string;
     isOpenPath: boolean;
+    isProtected: boolean;
 };
 
 type TargetsConfig = {
@@ -35,6 +36,13 @@ http {
 `;
 
 const apis = Object.entries(catalog.apis);
+const authService = targets.targets["auth-service"];
+if (!authService) {
+    throw new Error(
+        `Missing auth-service in the targets.`,
+    );
+}
+const authServicePath = authService.url;
 
 for (const [name, api] of apis) {
     const target = targets.targets[api.target];
@@ -45,12 +53,27 @@ for (const [name, api] of apis) {
         );
     }
 
+
     nginx += `
         location ${api.isOpenPath ? "" : "="} /api${api.path} {
+            ${api.isProtected ? "auth_request /auth-verify;" : ""}
             proxy_pass ${target.url}${api.path};
         }
 `;
 }
+
+nginx += `
+        location = /auth-verify {
+            internal;
+        
+            proxy_pass ${authServicePath}/auth/verify;
+        
+            proxy_pass_request_body off;
+            proxy_set_header Content-Length "";
+        
+            proxy_set_header Authorization $http_authorization;
+        }   
+`;
 
 nginx += `
     }

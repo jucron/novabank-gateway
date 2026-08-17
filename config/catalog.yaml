@@ -3,23 +3,28 @@ apis:
     path: /customers
     target: customer-service
     isOpenPath: true
+    isProtected: true
 
   accounts:
     path: /accounts
     target: account-service
     isOpenPath: true
+    isProtected: true
 
   payments:
     path: /payments
     target: payment-service
     isOpenPath: true
+    isProtected: true
 
   auth:
     path: /auth
     target: auth-service
     isOpenPath: true
+    isProtected: false
 
   gateway-health:
     path: /health
     target: gateway-health
     isOpenPath: false
+    isProtected: false
