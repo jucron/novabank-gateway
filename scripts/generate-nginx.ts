@@ -1,16 +1,11 @@
 import fs from "node:fs";
 import YAML from "yaml";
+import type {CatalogApi} from "./models/CatalogApi.js";
 
 type Target = {
     url: string;
 };
 
-type CatalogApi = {
-    path: string;
-    target: string;
-    isOpenPath: boolean;
-    isProtected: boolean;
-};
 
 type TargetsConfig = {
     targets: Record<string, Target>;
@@ -55,8 +50,8 @@ for (const [name, api] of apis) {
 
 
     nginx += `
-        location ${api.isOpenPath ? "" : "="} /api${api.path} {
-            ${api.isProtected ? "auth_request /auth-verify;" : ""}
+        location ${api.isPathDynamic ? "" : "="} /api${api.path} {
+            ${api.auth.type !== "disabled" ? "auth_request /auth-verify;" : ""}
             proxy_pass ${target.url}${api.path};
         }
 `;

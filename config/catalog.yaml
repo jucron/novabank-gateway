@@ -2,29 +2,41 @@ apis:
   customers:
     path: /customers
     target: customer-service
-    isOpenPath: true
-    isProtected: true
+    isPathDynamic: true
+    auth:
+      type: jwt
+      secret: novabank-dev-secret
 
   accounts:
     path: /accounts
     target: account-service
-    isOpenPath: true
-    isProtected: true
+    isPathDynamic: true
+    auth:
+      enabled: true
+      credentials:
+        alice: password123
+        bob: password456
 
   payments:
     path: /payments
     target: payment-service
-    isOpenPath: true
-    isProtected: true
+    isPathDynamic: true
+    auth:
+      type: api-key
+      header: X-API-Key
+      keys:
+        development-key: development-client
 
   auth:
     path: /auth
     target: auth-service
-    isOpenPath: true
-    isProtected: false
+    isPathDynamic: true
+    auth:
+      type: disabled
 
   gateway-health:
     path: /health
     target: gateway-health
-    isOpenPath: false
-    isProtected: false
+    isPathDynamic: false
+    auth:
+      type: disabled
